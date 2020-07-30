@@ -11,7 +11,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "dev": "NODE_ENV=development ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts",
+    "dev": "NODE_ENV=development ts-node-dev --inspect --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts",
     "test": "NODE_ENV=test jest"
   },
   "dependencies": {
