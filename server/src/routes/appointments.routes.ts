@@ -2,7 +2,6 @@ import { Router } from 'express'
 import { parseISO } from 'date-fns'
 
 import AppointmentsRepository from '../app/repositories/AppointmentsRepository'
-
 import CreateAppointmentService from '../app/services/CreateAppointmentService'
 
 const appointmentsRouter = Router()

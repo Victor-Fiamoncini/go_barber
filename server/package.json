@@ -12,7 +12,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "NODE_ENV=development ts-node-dev --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts",
-    "test": "NODE_ENV=test jest"
+		"test": "NODE_ENV=test jest",
+		"typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -21,6 +22,9 @@
     "express": "^4.17.1",
     "helmet": "^3.23.3",
     "morgan": "^1.10.0",
+    "pg": "^8.3.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.25",
     "uuidv4": "^6.2.0"
   },
   "devDependencies": {
