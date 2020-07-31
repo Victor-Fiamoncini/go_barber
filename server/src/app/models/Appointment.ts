@@ -5,7 +5,7 @@ class Appointment {
 	public provider: string
 	public date: Date
 
-	public constructor(provider: string, date: Date) {
+	public constructor({ provider, date }: Omit<Appointment, 'id'>) {
 		this.id = uuid()
 		this.provider = provider
 		this.date = date
