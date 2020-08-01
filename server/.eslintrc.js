@@ -27,5 +27,6 @@ module.exports = {
 		semi: ['error', 'never'],
 		'no-unused-vars': 'off',
 		'no-undef': 'off',
+		'@typescript-eslint/camelcase': 'off',
 	},
 }
