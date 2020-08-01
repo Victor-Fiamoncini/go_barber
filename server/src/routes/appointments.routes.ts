@@ -1,18 +1,30 @@
 import { Router } from 'express'
+import { getCustomRepository } from 'typeorm'
 import { parseISO } from 'date-fns'
 
 import AppointmentsRepository from '../app/repositories/AppointmentsRepository'
 import CreateAppointmentService from '../app/services/CreateAppointmentService'
-import { getCustomRepository } from 'typeorm'
+
+import ensureAuthenticated from '../app/middlewares/ensureAuthenticated'
 
 const appointmentsRouter = Router()
 
+appointmentsRouter.use(ensureAuthenticated)
+
 appointmentsRouter.get('/', async (request, response) => {
-	const appointmentsRepository = getCustomRepository(AppointmentsRepository)
+	try {
+		const appointmentsRepository = getCustomRepository(AppointmentsRepository)
 
-	const appointments = await appointmentsRepository.find()
+		const appointments = await appointmentsRepository.find()
 
-	return response.status(200).json(appointments)
+		if (!appointments.length) {
+			return response.status(404).json({ error: 'Appointments not found' })
+		}
+
+		return response.status(200).json(appointments)
+	} catch (err) {
+		return response.status(400).json({ error: err.message })
+	}
 })
 
 appointmentsRouter.post('/', async (request, response) => {
