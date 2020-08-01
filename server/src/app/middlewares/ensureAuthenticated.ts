@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { verify } from 'jsonwebtoken'
 
+import AppError from '../errors/AppError'
 import authConfig from '../config/auth'
 
 interface TokenPayload {
@@ -13,19 +14,19 @@ export default (request: Request, response: Response, next: NextFunction) => {
 	const { authorization } = request.headers
 
 	if (!authorization) {
-		throw new Error('Authorization not provided')
+		throw new AppError('Authorization not provided', 401)
 	}
 
 	const parts = authorization.split(' ')
 
 	if (parts.length !== 2) {
-		throw new Error('Invalid authorization')
+		throw new AppError('Invalid authorization', 401)
 	}
 
 	const [scheme, token] = parts
 
 	if (!/^Bearer$/i.test(scheme)) {
-		throw new Error('Invalid authorization')
+		throw new AppError('Invalid authorization', 401)
 	}
 
 	try {
@@ -39,6 +40,6 @@ export default (request: Request, response: Response, next: NextFunction) => {
 
 		return next()
 	} catch {
-		throw new Error('Invalid authorization')
+		throw new AppError('Invalid authorization', 401)
 	}
 }
