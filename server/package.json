@@ -11,9 +11,9 @@
   },
   "scripts": {
     "build": "tsc",
-    "dev": "NODE_ENV=development ts-node-dev --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts",
+    "dev": "NODE_ENV=development tsnd --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts",
 		"test": "NODE_ENV=test jest",
-		"typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
+		"typeorm": "tsnd ./node_modules/typeorm/cli.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
