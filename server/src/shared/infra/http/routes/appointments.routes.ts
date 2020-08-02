@@ -3,9 +3,9 @@ import { getCustomRepository } from 'typeorm'
 import { parseISO } from 'date-fns'
 
 import AppointmentsRepository from '../app/repositories/AppointmentsRepository'
-import CreateAppointmentService from '../app/services/CreateAppointmentService'
+import CreateAppointmentService from '../../../../modules/appointments/services/CreateAppointmentService'
 
-import ensureAuthenticated from '../app/middlewares/ensureAuthenticated'
+import ensureAuthenticated from '../../app/middlewares/ensureAuthenticated'
 
 const appointmentsRouter = Router()
 

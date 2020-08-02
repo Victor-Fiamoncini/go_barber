@@ -3,9 +3,9 @@ import multer from 'multer'
 
 import CreateUserService from '../app/services/CreateUserService'
 
-import ensureAuthenticated from '../app/middlewares/ensureAuthenticated'
-import uploadConfig from '../app/config/upload'
-import UpdateUserAvatarService from '../app/services/UpdateUserAvatarService'
+import ensureAuthenticated from '../../app/middlewares/ensureAuthenticated'
+import uploadConfig from '../../../../config/upload'
+import UpdateUserAvatarService from '../../../../modules/users/services/UpdateUserAvatarService'
 
 const usersRouter = Router()
 

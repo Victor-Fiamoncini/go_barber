@@ -5,11 +5,11 @@ import helmet from 'helmet'
 import morgan from 'morgan'
 import compression from 'compression'
 
-import './database'
+import '../typeorm'
 import routes from './routes'
-import uploadConfig from './app/config/upload'
+import uploadConfig from '../../../config/upload'
 
-import AppError from './app/errors/AppError'
+import AppError from '../../errors/AppError'
 
 const app = express()
 
