@@ -7,6 +7,8 @@ import cors from 'cors'
 import compression from 'compression'
 
 import '@shared/infra/typeorm'
+import '@shared/container'
+
 import routes from '@shared/infra/http/routes'
 import uploadConfig from '@config/upload'
 
