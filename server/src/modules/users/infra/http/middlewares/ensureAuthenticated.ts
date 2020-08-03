@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express'
 import { verify } from 'jsonwebtoken'
 
-import AppError from '../../../errors/AppError'
-import authConfig from '../config/auth'
+import AppError from '@shared/errors/AppError'
+import authConfig from '@config/auth'
 
 interface TokenPayload {
 	iat: number
@@ -34,9 +34,7 @@ export default (request: Request, response: Response, next: NextFunction) => {
 
 		const { sub } = decoded as TokenPayload
 
-		request.user = {
-			id: sub,
-		}
+		request.user = { id: sub }
 
 		return next()
 	} catch {

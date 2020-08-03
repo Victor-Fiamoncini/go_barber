@@ -10,6 +10,12 @@
 		"emitDecoratorMetadata": true,
 		"strictPropertyInitialization": false,
 		"rootDir": "./src",
-		"outDir": "./dist"
+		"outDir": "./dist",
+		"baseUrl": "./src",
+		"paths": {
+			"@modules/*": ["modules/*"],
+			"@config/*": ["config/*"],
+			"@shared/*": ["shared/*"],
+		}
   }
 }

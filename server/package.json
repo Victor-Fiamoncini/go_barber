@@ -10,10 +10,11 @@
     "node": "^12.16.1"
   },
   "scripts": {
-    "build": "tsc",
-    "dev": "NODE_ENV=development tsnd --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts",
+    "dev": "NODE_ENV=development tsnd -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/shared/infra/http/server.ts",
+    "start": "ts-node src/shared/infra/http/server.ts",
     "test": "NODE_ENV=test jest",
-    "typeorm": "tsnd ./node_modules/typeorm/cli.js"
+    "typeorm": "tsnd -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "build": "tsc"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
@@ -47,7 +48,9 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "prettier": "^2.0.5",
+    "ts-node": "^8.10.2",
     "ts-node-dev": "^1.0.0-pre.56",
+    "tsconfig-paths": "^3.9.0",
     "typescript": "^3.9.7"
   }
 }
