@@ -10,9 +10,9 @@
     "node": "^12.16.1"
   },
   "scripts": {
-    "dev": "NODE_ENV=development tsnd -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/shared/infra/http/server.ts",
+    "dev": "tsnd -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/shared/infra/http/server.ts",
     "start": "ts-node src/shared/infra/http/server.ts",
-    "test": "NODE_ENV=test jest",
+    "test": "jest",
     "typeorm": "tsnd -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "build": "tsc"
   },
@@ -40,6 +40,7 @@
     "@types/cors": "^2.8.6",
     "@types/express": "^4.17.7",
     "@types/helmet": "^0.0.47",
+    "@types/jest": "^26.0.8",
     "@types/jsonwebtoken": "^8.5.0",
     "@types/morgan": "^1.9.1",
     "@types/multer": "^1.4.3",
@@ -48,7 +49,10 @@
     "eslint": "^7.5.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
+    "jest": "^26.2.2",
     "prettier": "^2.0.5",
+    "supertest": "^4.0.2",
+    "ts-jest": "^26.1.4",
     "ts-node": "^8.10.2",
     "ts-node-dev": "^1.0.0-pre.56",
     "tsconfig-paths": "^3.9.0",
