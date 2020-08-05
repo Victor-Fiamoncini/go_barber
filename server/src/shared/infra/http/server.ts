@@ -22,7 +22,7 @@ app.use(cors())
 app.use(helmet())
 app.use(morgan('dev'))
 app.use(routes)
-app.use('/files', express.static(uploadConfig.directory))
+app.use('/files', express.static(uploadConfig.uploadFolder))
 app.use(
 	(err: Error, request: Request, response: Response, next: NextFunction) => {
 		if (err instanceof AppError) {

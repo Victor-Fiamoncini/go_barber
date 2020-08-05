@@ -2,13 +2,14 @@ import { diskStorage } from 'multer'
 import { resolve } from 'path'
 import { randomBytes } from 'crypto'
 
-const tempFolder = resolve(__dirname, '..', '..', '..', 'tmp', 'uploads')
+const tmpFolder = resolve(__dirname, '..', '..', '..', 'tmp')
 
 export default {
-	directory: tempFolder,
+	tmpFolder,
+	uploadFolder: resolve(tmpFolder, 'uploads'),
 	storage: diskStorage({
-		destination: tempFolder,
-		filename(req, file, callback) {
+		destination: tmpFolder,
+		filename(request, file, callback) {
 			const fileHash = randomBytes(10).toString('hex')
 			const fileName = `${fileHash}-${file.originalname}`
 
