@@ -10,9 +10,23 @@ class FakeUserTokensRepository implements IUserTokensRepository {
 	public async generate(user_id: string) {
 		const userToken = new UserToken()
 
-		Object.assign(userToken, { id: uuid(), token: uuid(), user_id })
+		Object.assign(userToken, {
+			id: uuid(),
+			token: uuid(),
+			user_id,
+			created_at: new Date(),
+			updated_at: new Date(),
+		})
 
 		this.userTokens.push(userToken)
+
+		return userToken
+	}
+
+	public async findByToken(token: string) {
+		const userToken = this.userTokens.find(
+			userToken => userToken.token === token
+		)
 
 		return userToken
 	}
