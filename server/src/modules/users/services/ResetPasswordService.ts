@@ -3,7 +3,7 @@ import { injectable, inject } from 'tsyringe'
 import { isAfter, addHours } from 'date-fns'
 
 import IUsersRepository from '@modules/users/repositories/IUsersRepository'
-import IUserTokensRepository from '@modules/users/repositories/IUserTokensRepository'
+import IUsersTokensRepository from '@modules/users/repositories/IUsersTokensRepository'
 import IHashProvider from '@modules/users/providers/HashProvider/models/IHashProvider'
 
 import AppError from '@shared/errors/AppError'
@@ -19,15 +19,15 @@ class ResetPasswordEmailService {
 		@inject('UsersRepository')
 		private usersRepository: IUsersRepository,
 
-		@inject('UserTokensRepository')
-		private userTokensRepository: IUserTokensRepository,
+		@inject('UsersTokensRepository')
+		private usersTokensRepository: IUsersTokensRepository,
 
 		@inject('HashProvider')
 		private hashProvider: IHashProvider
 	) {}
 
 	public async execute({ token, password }: IRequest) {
-		const userToken = await this.userTokensRepository.findByToken(token)
+		const userToken = await this.usersTokensRepository.findByToken(token)
 
 		if (!userToken) {
 			throw new AppError('User token does not exists')

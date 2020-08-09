@@ -2,7 +2,7 @@ import 'reflect-metadata'
 import { injectable, inject } from 'tsyringe'
 
 import IUsersRepository from '@modules/users/repositories/IUsersRepository'
-import IUserTokensRepository from '@modules/users/repositories/IUserTokensRepository'
+import IUsersTokensRepository from '@modules/users/repositories/IUsersTokensRepository'
 import IMailProvider from '@shared/container/providers/MailProvider/models/IMailProvider'
 
 import AppError from '@shared/errors/AppError'
@@ -20,8 +20,8 @@ class SendForgotPasswordEmailService {
 		@inject('MailProvider')
 		private mailProvider: IMailProvider,
 
-		@inject('UserTokensRepository')
-		private userTokensRepository: IUserTokensRepository
+		@inject('UsersTokensRepository')
+		private usersTokensRepository: IUsersTokensRepository
 	) {}
 
 	public async execute({ email }: IRequest) {
@@ -31,9 +31,22 @@ class SendForgotPasswordEmailService {
 			throw new AppError('User does not exist')
 		}
 
-		await this.userTokensRepository.generate(user.id)
+		const { token } = await this.usersTokensRepository.generate(user.id)
 
-		this.mailProvider.sendMail(email, 'Pedido de recuperação de senha recebido')
+		await this.mailProvider.sendMail({
+			to: {
+				name: user.name,
+				email: user.email,
+			},
+			subject: '[GoBarber] Recuperação de Senha',
+			templateData: {
+				template: 'Olá, {{ name }}: {{ token }}',
+				variables: {
+					name: user.name,
+					token,
+				},
+			},
+		})
 	}
 }
 

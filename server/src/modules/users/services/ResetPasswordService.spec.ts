@@ -1,7 +1,7 @@
 import ResetPasswordService from './ResetPasswordService'
 
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository'
-import FakeUserTokensRepository from '@modules/users/repositories/fakes/FakeUserTokensRepository'
+import FakeUserTokensRepository from '@modules/users/repositories/fakes/FakeUsersTokensRepository'
 import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider'
 
 import AppError from '@shared/errors/AppError'

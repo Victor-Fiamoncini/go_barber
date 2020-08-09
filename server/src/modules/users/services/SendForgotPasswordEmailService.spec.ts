@@ -1,7 +1,7 @@
 import SendForgotPasswordEmailService from './SendForgotPasswordEmailService'
 
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository'
-import FakeUserTokensRepository from '@modules/users/repositories/fakes/FakeUserTokensRepository'
+import FakeUserTokensRepository from '@modules/users/repositories/fakes/FakeUsersTokensRepository'
 import FakeMailProvider from '@shared/container/providers/MailProvider/fakes/FakeMailProvider'
 
 import AppError from '@shared/errors/AppError'

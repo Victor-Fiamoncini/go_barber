@@ -25,6 +25,8 @@ app.use(routes)
 app.use('/files', express.static(uploadConfig.uploadFolder))
 app.use(
 	(err: Error, request: Request, response: Response, next: NextFunction) => {
+		console.log(err)
+
 		if (err instanceof AppError) {
 			return response.status(err.statusCode).json({
 				status: 'error',
