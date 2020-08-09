@@ -9,7 +9,7 @@ const profileController = new ProfileController()
 
 profileRouter.use(ensureAuthenticated)
 
-profileRouter.get('/:id', profileController.show)
+profileRouter.get('/', profileController.show)
 profileRouter.put('/', profileController.update)
 
 export default profileRouter
