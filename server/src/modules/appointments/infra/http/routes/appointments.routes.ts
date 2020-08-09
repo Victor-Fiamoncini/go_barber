@@ -8,16 +8,6 @@ const appointmentsController = new AppointmentsController()
 
 appointmentsRouter.use(ensureAuthenticated)
 
-// appointmentsRouter.get('/', async (request, response) => {
-// 	const appointments = await appointmentsRepository.find()
-
-// 	if (!appointments.length) {
-// 		return response.status(404).json({ error: 'Appointments not found' })
-// 	}
-
-// 	return response.status(200).json(appointments)
-// })
-
 appointmentsRouter.post('/', appointmentsController.create)
 
 export default appointmentsRouter
