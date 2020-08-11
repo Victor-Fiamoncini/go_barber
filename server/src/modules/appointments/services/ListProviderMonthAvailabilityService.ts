@@ -26,8 +26,6 @@ class ListProviderMonthAvailabilityService {
 			}
 		)
 
-		console.log('appointments', appointments)
-
 		const numberDaysInMonth = getDaysInMonth(new Date(year, month - 1))
 
 		const eachDay = Array.from(
