@@ -1,12 +1,13 @@
 import 'reflect-metadata'
 import { injectable, inject } from 'tsyringe'
-import { startOfHour } from 'date-fns'
+import { startOfHour, isBefore } from 'date-fns'
 
 import AppError from '@shared/errors/AppError'
 import IAppointmentesRepository from '@modules/appointments/repositories/IAppointmentsRepository'
 
 interface IRequest {
 	provider_id: string
+	user_id: string
 	date: Date
 }
 
@@ -17,8 +18,12 @@ class CreateAppointmentService {
 		private appointmentsRepository: IAppointmentesRepository
 	) {}
 
-	public async execute({ date, provider_id }: IRequest) {
+	public async execute({ date, provider_id, user_id }: IRequest) {
 		const appointmentDate = startOfHour(date)
+
+		if (isBefore(appointmentDate, Date.now())) {
+			throw new AppError('You cannot create an appointment on a past date')
+		}
 
 		const findAppointmentInSameDate = await this.appointmentsRepository.findByDate(
 			appointmentDate
@@ -30,6 +35,7 @@ class CreateAppointmentService {
 
 		const appointment = await this.appointmentsRepository.create({
 			provider_id,
+			user_id,
 			date: appointmentDate,
 		})
 
