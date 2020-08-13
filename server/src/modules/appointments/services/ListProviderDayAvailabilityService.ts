@@ -30,10 +30,7 @@ class ListProviderDayAvailabilityService {
 
 		const hourStart = 8
 
-		const eachHour = Array.from(
-			{ length: 10 },
-			(value, index) => index + hourStart
-		)
+		const eachHour = Array.from({ length: 10 }, (_, index) => index + hourStart)
 
 		const currentDate = new Date(Date.now())
 
