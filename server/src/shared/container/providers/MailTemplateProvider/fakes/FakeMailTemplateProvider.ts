@@ -6,4 +6,4 @@ class FakeMailTemplateProvider implements IMailTemplateProvider {
 	}
 }
 
-export default FakeMailTemplateProvider
+export default FakeMailTemplateProvider;
