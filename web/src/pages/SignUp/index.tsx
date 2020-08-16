@@ -10,7 +10,7 @@ import Input from '../../components/Input'
 import Button from '../../components/Button'
 
 const SignUp: React.FC = () => {
-	function handleSubmit(data: object) {}
+	function handleSubmit(data: object) { }
 
 	return (
 		<Container>
