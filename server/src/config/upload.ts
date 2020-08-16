@@ -2,7 +2,7 @@ import { diskStorage } from 'multer'
 import { resolve } from 'path'
 import { randomBytes } from 'crypto'
 
-const tmpFolder = resolve(__dirname, '..', '..', '..', 'tmp')
+const tmpFolder = resolve(__dirname, '..', '..', 'tmp')
 
 export default {
 	tmpFolder,
