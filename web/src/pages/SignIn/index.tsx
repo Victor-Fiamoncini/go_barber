@@ -5,6 +5,7 @@ import { FormHandles } from '@unform/core'
 import * as Yup from 'yup'
 
 import { useAuth } from '../../context/AuthContext'
+import { useToast } from '../../context/ToastContext'
 
 import getValidationErrors from '../../utils/getValidationErrors'
 
@@ -22,6 +23,7 @@ interface SignInFormData {
 
 const SignIn: React.FC = () => {
 	const { signIn } = useAuth()
+	const { addToast } = useToast()
 
 	const formRef = useRef<FormHandles>(null)
 
@@ -48,9 +50,11 @@ const SignIn: React.FC = () => {
 
 					formRef.current?.setErrors(errors)
 				}
+
+				addToast()
 			}
 		},
-		[signIn]
+		[signIn, addToast]
 	)
 
 	return (
