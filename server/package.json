@@ -14,7 +14,7 @@
     "start": "ts-node src/shared/infra/http/server.ts",
     "typeorm": "tsnd -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "build": "tsc",
-    "test": "jest -i"
+    "test": "jest"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
@@ -45,6 +45,7 @@
     "@types/helmet": "^0.0.47",
     "@types/jest": "^26.0.8",
     "@types/jsonwebtoken": "^8.5.0",
+    "@types/mongodb": "^3.5.26",
     "@types/morgan": "^1.9.1",
     "@types/multer": "^1.4.3",
     "@types/nodemailer": "^6.4.0",
