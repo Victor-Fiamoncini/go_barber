@@ -1,5 +1,8 @@
+# IDE
 .idea/
 .vscode/
+
+# NodeJS / Build / Misc
 node_modules/
 build/
 dist/
@@ -7,12 +10,18 @@ coverage/
 cache/
 coverage/
 
+# Static files
 tmp/uploads/*
 !tmp/uploads/.gitkeep
 
+# Env
 env.js
 *.env
 *.DS_Store
 *.sqlite
 
+# Logs
 yarn-error.log
+
+# Database
+ormconfig.json
