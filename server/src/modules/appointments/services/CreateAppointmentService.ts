@@ -2,9 +2,10 @@ import 'reflect-metadata'
 import { injectable, inject } from 'tsyringe'
 import { startOfHour, isBefore, getHours, format } from 'date-fns'
 
-import AppError from '@shared/errors/AppError'
 import IAppointmentesRepository from '@modules/appointments/repositories/IAppointmentsRepository'
 import INotificationsRepository from '@modules/notifications/repositories/INotificationsRepository'
+
+import AppError from '@shared/errors/AppError'
 
 interface IRequest {
 	provider_id: string

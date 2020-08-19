@@ -5,6 +5,7 @@ import helmet from 'helmet'
 import morgan from 'morgan'
 import cors from 'cors'
 import compression from 'compression'
+import { errors } from 'celebrate'
 
 import '@shared/infra/typeorm'
 import '@shared/container'
@@ -23,6 +24,7 @@ app.use(helmet())
 app.use(morgan('dev'))
 app.use(routes)
 app.use('/files', express.static(uploadConfig.uploadFolder))
+app.use(errors())
 app.use(
 	(err: Error, request: Request, response: Response, next: NextFunction) => {
 		console.log(err)
