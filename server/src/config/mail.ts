@@ -1,5 +1,5 @@
 interface IMailConfig {
-	driver: 'ethereal' | 'mailtrap' | 'ses'
+	driver: 'ethereal' | 'mailtrap'
 	defaults: {
 		from: {
 			email: string
@@ -16,8 +16,8 @@ export default {
 	driver: process.env.MAIL_DRIVER || 'ethereal',
 	defaults: {
 		from: {
-			email: 'gobarber@mail.com',
-			name: 'Oi',
+			email: 'equipe@gobarber.com.br',
+			name: 'Equipe GoBarber',
 		},
 	},
 	host: process.env.MAIL_HOST,

@@ -1,5 +1,6 @@
 import { injectable, inject } from 'tsyringe'
 import nodemailer, { Transporter } from 'nodemailer'
+
 import mailConfig from '@config/mail'
 
 import IMailProvider from '@shared/container/providers/MailProvider/models/IMailProvider'
@@ -30,10 +31,12 @@ class MailtrapMailProvider implements IMailProvider {
 	}
 
 	public async sendMail({ to, from, subject, templateData }: ISendMailDTO) {
+		const { defaults } = mailConfig
+
 		await this.client.sendMail({
 			from: {
-				name: from?.name || 'Equipe GoBarber',
-				address: from?.email || 'equipe@gobarber.com.br',
+				name: from?.name || defaults.from.name,
+				address: from?.email || defaults.from.email,
 			},
 			to: {
 				name: to.name,
