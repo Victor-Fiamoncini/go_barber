@@ -12,12 +12,14 @@ import '@shared/infra/typeorm'
 import '@shared/container'
 
 import routes from '@shared/infra/http/routes'
+import rateLimiter from '@shared/infra/http/middlewares/rateLimiter'
 import uploadConfig from '@config/upload'
 
 import AppError from '@shared/errors/AppError'
 
 const app = express()
 
+app.use(rateLimiter)
 app.use(express.json())
 app.use(compression())
 app.use(cors())
@@ -44,6 +46,6 @@ app.use(
 	}
 )
 
-const PORT = 3333
+const { PORT } = process.env
 
 app.listen(PORT, () => console.log(`Server running on port: ${PORT} ☕️`))
