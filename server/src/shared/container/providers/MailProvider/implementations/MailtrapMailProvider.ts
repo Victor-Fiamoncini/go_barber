@@ -9,32 +9,31 @@ import ISendMailDTO from '@shared/container/providers/MailProvider/dtos/ISendMai
 import IMailTemplateProvider from '@shared/container/providers/MailTemplateProvider/models/IMailTemplateProvider'
 
 @injectable()
-class EtherealMailProvider implements IMailProvider {
+class MailtrapMailProvider implements IMailProvider {
 	private client: Transporter
 
 	constructor(
 		@inject('MailTemplateProvider')
 		private mailTemplateProvider: IMailTemplateProvider
 	) {
-		nodemailer.createTestAccount().then(account => {
-			const transporter = nodemailer.createTransport({
-				host: account.smtp.host,
-				port: account.smtp.port,
-				secure: account.smtp.secure,
-				auth: {
-					user: account.user,
-					pass: account.pass,
-				},
-			})
+		const { host, port, user, pass } = mailConfig
 
-			this.client = transporter
+		const transporter = nodemailer.createTransport({
+			host,
+			port: Number(port),
+			auth: {
+				user,
+				pass,
+			},
 		})
+
+		this.client = transporter
 	}
 
 	public async sendMail({ to, from, subject, templateData }: ISendMailDTO) {
 		const { defaults } = mailConfig
 
-		const message = await this.client.sendMail({
+		await this.client.sendMail({
 			from: {
 				name: from?.name || defaults.from.name,
 				address: from?.email || defaults.from.email,
@@ -46,9 +45,7 @@ class EtherealMailProvider implements IMailProvider {
 			subject,
 			html: await this.mailTemplateProvider.parse(templateData),
 		})
-
-		console.log(nodemailer.getTestMessageUrl(message))
 	}
 }
 
-export default EtherealMailProvider
+export default MailtrapMailProvider

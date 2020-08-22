@@ -1,9 +1,12 @@
 import 'reflect-metadata'
 import { injectable, inject } from 'tsyringe'
-import { startOfHour, isBefore, getHours } from 'date-fns'
+import { startOfHour, isBefore, getHours, format } from 'date-fns'
+
+import IAppointmentesRepository from '@modules/appointments/repositories/IAppointmentsRepository'
+import INotificationsRepository from '@modules/notifications/repositories/INotificationsRepository'
+import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider'
 
 import AppError from '@shared/errors/AppError'
-import IAppointmentesRepository from '@modules/appointments/repositories/IAppointmentsRepository'
 
 interface IRequest {
 	provider_id: string
@@ -15,8 +18,14 @@ interface IRequest {
 class CreateAppointmentService {
 	constructor(
 		@inject('AppointmentsRepository')
-		private appointmentsRepository: IAppointmentesRepository
-	) { }
+		private appointmentsRepository: IAppointmentesRepository,
+
+		@inject('NotificationsRepository')
+		private notificationsRepository: INotificationsRepository,
+
+		@inject('CacheProvider')
+		private cacheProvider: ICacheProvider
+	) {}
 
 	public async execute({ date, provider_id, user_id }: IRequest) {
 		const appointmentDate = startOfHour(date)
@@ -46,6 +55,21 @@ class CreateAppointmentService {
 			user_id,
 			date: appointmentDate,
 		})
+
+		// eslint-disable-next-line quotes
+		const formattedDate = format(appointmentDate, "dd/MM/yyyy 'às' HH:mm'h'")
+
+		await this.notificationsRepository.create({
+			recipient_id: provider_id,
+			content: `Novo agendamento para ${formattedDate}`,
+		})
+
+		await this.cacheProvider.invalidate(
+			`provider-appointments:${provider_id}:${format(
+				appointmentDate,
+				'yyyy-M-d'
+			)}`
+		)
 
 		return appointment
 	}
