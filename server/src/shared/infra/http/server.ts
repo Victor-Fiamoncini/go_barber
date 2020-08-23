@@ -19,14 +19,14 @@ import AppError from '@shared/errors/AppError'
 
 const app = express()
 
-app.use(rateLimiter)
 app.use(express.json())
 app.use(compression())
 app.use(cors())
 app.use(helmet())
 app.use(morgan('dev'))
-app.use(routes)
 app.use('/files', express.static(uploadConfig.uploadFolder))
+app.use(rateLimiter)
+app.use(routes)
 app.use(errors())
 app.use(
 	(err: Error, request: Request, response: Response, next: NextFunction) => {
