@@ -56,7 +56,6 @@ const ForgotPassword: React.FC = () => {
 					const errors = getValidationErrors(err)
 
 					formRef.current?.setErrors(errors)
-
 					return
 				}
 
@@ -87,7 +86,7 @@ const ForgotPassword: React.FC = () => {
 					</Form>
 					<Link to="/">
 						<FiLogIn />
-						Voltar ao login
+						Voltar para logon
 					</Link>
 				</AnimationContainer>
 			</Content>
