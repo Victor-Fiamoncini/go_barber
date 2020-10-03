@@ -1,4 +1,6 @@
-# Reduperação de senha
+# Features desenvolvidas ao longo do curso (backend):
+
+# Recuperação de senha
 
 **RF**
 - O usuário deve poder recuperar sua senha informando seu e-mail;
