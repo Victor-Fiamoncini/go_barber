@@ -27,5 +27,6 @@ module.exports = {
 		quotes: ['error', 'single'],
 		semi: ['error', 'never'],
 		'react/prop-types': 'off',
+		'@typescript-eslint/no-explicit-any': 'off',
 	},
 }
