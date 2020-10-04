@@ -29,6 +29,7 @@ import {
 	ForgotPasswordText,
 	Title,
 } from './styles'
+import { useAuth } from '../../context/AuthContext'
 
 interface SignInFormData {
 	email: string
@@ -40,6 +41,7 @@ const SignIn: React.FC = () => {
 	const passwordInputRef = useRef<TextInput>(null)
 
 	const navigation = useNavigation()
+	const { signIn, user } = useAuth()
 
 	const handleSignIn = useCallback(async (data: SignInFormData) => {
 		try {
@@ -56,7 +58,9 @@ const SignIn: React.FC = () => {
 
 			const { email, password } = data
 
-			// await signIn({ email, password })
+			await signIn({ email, password })
+
+			console.log(user)
 		} catch (err) {
 			if (err instanceof Yup.ValidationError) {
 				const errors = getValidationErrors(err)

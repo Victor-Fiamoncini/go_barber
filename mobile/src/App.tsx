@@ -7,6 +7,8 @@ import { StatusBar } from 'expo-status-bar'
 import { useFonts } from 'expo-font'
 import { NavigationContainer } from '@react-navigation/native'
 
+import AppProvider from './context'
+
 import Routes from './routes'
 
 import robotoSlabRegular from '../assets/fonts/RobotoSlab-Regular.ttf'
@@ -22,9 +24,11 @@ const App: React.FC = () => {
 		<NavigationContainer>
 			<StatusBar style="light" backgroundColor="#312e38" />
 			{isLoaded && (
-				<View style={{ flex: 1, backgroundColor: '#312e38' }}>
-					<Routes />
-				</View>
+				<AppProvider>
+					<View style={{ flex: 1, backgroundColor: '#312e38' }}>
+						<Routes />
+					</View>
+				</AppProvider>
 			)}
 		</NavigationContainer>
 	)

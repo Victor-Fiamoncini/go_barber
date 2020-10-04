@@ -28,5 +28,6 @@ module.exports = {
 		semi: ['error', 'never'],
 		'react/prop-types': 'off',
 		'@typescript-eslint/no-explicit-any': 'off',
+		'@typescript-eslint/ban-types': 'off',
 	},
 }
