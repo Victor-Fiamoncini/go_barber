@@ -20,6 +20,7 @@ interface SignInCredentials {
 
 interface AuthContextData {
 	user: object
+	loading: boolean
 	signIn: (credentials: SignInCredentials) => Promise<void>
 	signOut: () => void
 }
@@ -28,6 +29,7 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 
 export const AuthProvider: React.FC = ({ children }) => {
 	const [data, setData] = useState<AuthState>({} as AuthState)
+	const [loading, setLoading] = useState(true)
 
 	const signIn = useCallback(async ({ email, password }) => {
 		const response = await apiClient.post('/sessions', { email, password })
@@ -64,13 +66,15 @@ export const AuthProvider: React.FC = ({ children }) => {
 					user: JSON.parse(userData),
 				})
 			}
+
+			setLoading(false)
 		}
 
 		loadStorageData()
 	}, [])
 
 	return (
-		<AuthContext.Provider value={{ user: data.user, signIn, signOut }}>
+		<AuthContext.Provider value={{ user: data.user, loading, signIn, signOut }}>
 			{children}
 		</AuthContext.Provider>
 	)

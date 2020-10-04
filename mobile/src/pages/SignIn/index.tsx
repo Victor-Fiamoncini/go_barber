@@ -41,41 +41,42 @@ const SignIn: React.FC = () => {
 	const passwordInputRef = useRef<TextInput>(null)
 
 	const navigation = useNavigation()
-	const { signIn, user } = useAuth()
+	const { signIn } = useAuth()
 
-	const handleSignIn = useCallback(async (data: SignInFormData) => {
-		try {
-			formRef.current?.setErrors({})
+	const handleSignIn = useCallback(
+		async (data: SignInFormData) => {
+			try {
+				formRef.current?.setErrors({})
 
-			const schema = Yup.object().shape({
-				email: Yup.string()
-					.required('Email obrigatório')
-					.email('Digite um e-mail válido'),
-				password: Yup.string().required('Senha obrigatória'),
-			})
+				const schema = Yup.object().shape({
+					email: Yup.string()
+						.required('Email obrigatório')
+						.email('Digite um e-mail válido'),
+					password: Yup.string().required('Senha obrigatória'),
+				})
 
-			await schema.validate(data, { abortEarly: false })
+				await schema.validate(data, { abortEarly: false })
 
-			const { email, password } = data
+				const { email, password } = data
 
-			await signIn({ email, password })
+				await signIn({ email, password })
+			} catch (err) {
+				if (err instanceof Yup.ValidationError) {
+					const errors = getValidationErrors(err)
 
-			console.log(user)
-		} catch (err) {
-			if (err instanceof Yup.ValidationError) {
-				const errors = getValidationErrors(err)
+					formRef.current?.setErrors(errors)
 
-				formRef.current?.setErrors(errors)
+					return
+				}
 
-				return
+				Alert.alert(
+					'Erro na autenticação',
+					'Ocorreu um erro ao fazer login, confira suas credenciais'
+				)
 			}
-
-			Alert.alert(
-				'Erro na autenticação',
-				'Ocorreu um erro ao fazer login, confira suas credenciais'
-			)
-		}
-	}, [])
+		},
+		[signIn]
+	)
 
 	return (
 		<>
