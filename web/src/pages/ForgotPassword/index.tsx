@@ -1,14 +1,14 @@
-import React, { useCallback, useRef } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FiLogIn, FiMail, FiLock } from 'react-icons/fi'
+import { FiLogIn, FiMail } from 'react-icons/fi'
 import { Form } from '@unform/web'
 import { FormHandles } from '@unform/core'
 import * as Yup from 'yup'
 
-import { useAuth } from '../../context/AuthContext'
 import { useToast } from '../../context/ToastContext'
 
 import getValidationErrors from '../../utils/getValidationErrors'
+import apiClient from '../../services/apiClient'
 
 import { AnimationContainer, Container, Content, Background } from './styles'
 
@@ -17,34 +17,40 @@ import logo from '../../assets/logo.svg'
 import Input from '../../components/Input'
 import Button from '../../components/Button'
 
-interface SignInFormData {
+interface ForgotPasswordFormData {
 	email: string
-	password: string
 }
 
-const SignIn: React.FC = () => {
+const ForgotPassword: React.FC = () => {
+	const [loading, setLoading] = useState(false)
+
 	const formRef = useRef<FormHandles>(null)
 
-	const { signIn } = useAuth()
 	const { addToast } = useToast()
 
 	const handleSubmit = useCallback(
-		async (data: SignInFormData) => {
+		async (data: ForgotPasswordFormData) => {
 			try {
+				setLoading(true)
+
 				formRef.current?.setErrors({})
 
 				const schema = Yup.object().shape({
 					email: Yup.string()
 						.required('Email obrigatório')
 						.email('Digite um e-mail válido'),
-					password: Yup.string().required('Senha obrigatória'),
 				})
 
 				await schema.validate(data, { abortEarly: false })
 
-				const { email, password } = data
+				await apiClient.post('/password/forgot', { email: data.email })
 
-				await signIn({ email, password })
+				addToast({
+					type: 'success',
+					title: 'E-mail enviado',
+					description:
+						'Enviamos um e-mail para confirmar sua recuperação de senha',
+				})
 			} catch (err) {
 				if (err instanceof Yup.ValidationError) {
 					const errors = getValidationErrors(err)
@@ -55,13 +61,15 @@ const SignIn: React.FC = () => {
 
 				addToast({
 					type: 'error',
-					title: 'Erro na autenticação',
+					title: 'Erro na recuperação de senha',
 					description:
-						'Ocorreu um erro ao fazer login, confira suas credenciais',
+						'Ocorreu um erro ao tentar realizar a recuperação de senha, tente novamente',
 				})
+			} finally {
+				setLoading(false)
 			}
 		},
-		[signIn, addToast]
+		[addToast]
 	)
 
 	return (
@@ -70,20 +78,15 @@ const SignIn: React.FC = () => {
 				<AnimationContainer>
 					<img src={logo} alt="GoBarber" />
 					<Form ref={formRef} onSubmit={handleSubmit}>
-						<h1>Faça seu logon</h1>
+						<h1>Recuperar senha</h1>
 						<Input name="email" icon={FiMail} placeholder="E-mail" />
-						<Input
-							name="password"
-							type="password"
-							icon={FiLock}
-							placeholder="Senha"
-						/>
-						<Button type="submit">Entrar</Button>
-						<Link to="/forgot-password">Esqueci minha senha</Link>
+						<Button type="submit" loading={loading}>
+							Recuperar
+						</Button>
 					</Form>
-					<Link to="/signup">
+					<Link to="/">
 						<FiLogIn />
-						Criar conta
+						Voltar para logon
 					</Link>
 				</AnimationContainer>
 			</Content>
@@ -92,4 +95,4 @@ const SignIn: React.FC = () => {
 	)
 }
 
-export default SignIn
+export default ForgotPassword
