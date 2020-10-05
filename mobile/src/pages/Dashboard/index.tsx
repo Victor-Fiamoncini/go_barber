@@ -1,15 +1,37 @@
-import React from 'react'
-import { Button } from 'react-native'
+import React, { useCallback } from 'react'
+import { useNavigation } from '@react-navigation/native'
 
-import { Container } from './styles'
 import { useAuth } from '../../context/AuthContext'
 
+import {
+	Container,
+	Header,
+	HeaderTitle,
+	ProfileButton,
+	UserAvatar,
+	UserName,
+} from './styles'
+
 const Dashboard: React.FC = () => {
-	const { signOut } = useAuth()
+	const { user } = useAuth()
+
+	const { navigate } = useNavigation()
+
+	const navigateToProfile = useCallback(() => {
+		navigate('Profile')
+	}, [navigate])
 
 	return (
 		<Container>
-			<Button title="sair" onPress={signOut} />
+			<Header>
+				<HeaderTitle>
+					Bem vindo, {'\n'}
+					<UserName>{user.name}</UserName>
+				</HeaderTitle>
+				<ProfileButton onPress={navigateToProfile}>
+					<UserAvatar source={{ uri: user.avatar_url }} />
+				</ProfileButton>
+			</Header>
 		</Container>
 	)
 }

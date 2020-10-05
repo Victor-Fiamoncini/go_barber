@@ -7,7 +7,7 @@
 		"entryPoint": "./src/App.tsx",
     "splash": {
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#312e38"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
