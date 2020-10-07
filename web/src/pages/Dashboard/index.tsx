@@ -8,6 +8,8 @@ import 'react-day-picker/lib/style.css'
 
 import { useAuth } from '../../context/AuthContext'
 
+import defaultAvatar from '../../assets/default-avatar.png'
+
 import {
 	Container,
 	Header,
@@ -106,6 +108,7 @@ const Dashboard: React.FC = () => {
 	}, [currentMonth, monthAvailability])
 
 	const selectedDateAsText = useMemo(() => {
+		// eslint-disable-next-line quotes
 		return format(selectedDate, "'Dia' dd 'de' MMMM", { locale: ptBR })
 	}, [selectedDate])
 
@@ -137,7 +140,10 @@ const Dashboard: React.FC = () => {
 				<HeaderContent>
 					<img src={logo} alt="GoBarber" />
 					<Profile>
-						<img src={user.avatar_url} alt={`Perfil de ${user.name}`} />
+						<img
+							src={user.avatar_url || defaultAvatar}
+							alt={`Perfil de ${user.name}`}
+						/>
 						<div>
 							<span>Bem-vindo (a)</span>
 							<Link to="/profile">

@@ -21,7 +21,9 @@ import apiClient from '../../services/apiClient'
 interface ProfileFormData {
 	name: string
 	email: string
+	old_password: string
 	password: string
+	password_confirmation: string
 }
 
 const Profile: React.FC = () => {
@@ -41,19 +43,46 @@ const Profile: React.FC = () => {
 					email: Yup.string()
 						.required('Email obrigatório')
 						.email('Digite um e-mail válido'),
-					password: Yup.string().min(6, 'No mínimo 6 digitos'),
+					old_password: Yup.string().nullable(true).notRequired(),
+					password: Yup.string().nullable(true).notRequired(),
+					password_confirmation: Yup.string().oneOf(
+						[Yup.ref('password')],
+						'Confirmação incorreta'
+					),
 				})
 
 				await schema.validate(data, { abortEarly: false })
 
-				await api.post('/users', data)
+				const {
+					name,
+					email,
+					password,
+					old_password,
+					password_confirmation,
+				} = data
+
+				const formData = Object.assign(
+					{
+						name,
+						email,
+					},
+					old_password && {
+						password,
+						old_password,
+						password_confirmation,
+					}
+				)
+
+				const response = await api.put('/profile', formData)
+
+				updateUser(response.data)
 
 				history.push('/')
 
 				addToast({
 					type: 'success',
-					title: 'Cadastro realizado!',
-					description: 'Você já pode fazer seu logon no GoBarber!',
+					title: 'Cadastro atualizado!',
+					description: 'Suas informações foram atualizadas com sucesso!',
 				})
 			} catch (err) {
 				if (err instanceof Yup.ValidationError) {
@@ -65,8 +94,9 @@ const Profile: React.FC = () => {
 
 				addToast({
 					type: 'error',
-					title: 'Erro na autenticação',
-					description: 'Ocorreu um erro ao fazer o cadastro, confira os campos',
+					title: 'Erro ao atualizar cadastro',
+					description:
+						'Ocorreu um erro ao atualizar o cadastro, confira os campos',
 				})
 			}
 		},
