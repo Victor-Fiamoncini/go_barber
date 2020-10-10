@@ -7,6 +7,8 @@ import { useAuth } from '../../context/AuthContext'
 import apiClient from '../../services/apiClient'
 import defaultAvatar from '../../assets/default-avatar.png'
 
+import { Provider } from './types'
+
 import {
 	Container,
 	Header,
@@ -24,28 +26,22 @@ import {
 	ProvidersListTitle,
 } from './styles'
 
-export interface Provider {
-	id: string
-	name: string
-	avatar_url: string
-}
-
 const Dashboard: React.FC = () => {
 	const [providers, setProviders] = useState<Provider[]>([])
 
 	const { user } = useAuth()
-
 	const { navigate } = useNavigation()
 
 	const navigateToProfile = useCallback(() => {
 		navigate('Profile')
 	}, [navigate])
 
-	useEffect(() => {
-		apiClient.get('/providers').then(response => {
-			setProviders(response.data)
-		})
-	}, [])
+	const navigateToCreateAppointment = useCallback(
+		(providerId: string) => {
+			navigate('CreateAppointment', { providerId })
+		},
+		[navigate]
+	)
 
 	const userAvatar = useMemo(() => {
 		return user.avatar_url ? { uri: user.avatar_url } : defaultAvatar
@@ -53,6 +49,12 @@ const Dashboard: React.FC = () => {
 
 	const providerAvatar = useCallback((avatar: string) => {
 		return avatar ? { uri: avatar } : defaultAvatar
+	}, [])
+
+	useEffect(() => {
+		apiClient.get('/providers').then(response => {
+			setProviders(response.data)
+		})
 	}, [])
 
 	return (
@@ -73,7 +75,9 @@ const Dashboard: React.FC = () => {
 					<ProvidersListTitle>Cabeleireiros</ProvidersListTitle>
 				}
 				renderItem={({ item: provider }) => (
-					<ProviderContainer>
+					<ProviderContainer
+						onPress={() => navigateToCreateAppointment(provider.id)}
+					>
 						<ProviderAvatar source={providerAvatar(provider.avatar_url)} />
 						<ProviderInfo>
 							<ProviderName>{provider.name}</ProviderName>
