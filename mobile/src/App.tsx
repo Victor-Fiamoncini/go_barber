@@ -5,9 +5,9 @@ import { registerRootComponent } from 'expo'
 import { useFonts } from 'expo-font'
 import { NavigationContainer } from '@react-navigation/native'
 
-import AppProvider from './context'
+import Wrapper from './Wrapper'
 
-import Routes from './routes'
+import AppProvider from './context'
 
 import robotoSlabRegular from '../assets/fonts/RobotoSlab-Regular.ttf'
 import robotoSlabMedium from '../assets/fonts/RobotoSlab-Medium.ttf'
@@ -22,7 +22,7 @@ const App: React.FC = () => {
 		<NavigationContainer>
 			{isLoaded && (
 				<AppProvider>
-					<Routes />
+					<Wrapper />
 				</AppProvider>
 			)}
 		</NavigationContainer>
