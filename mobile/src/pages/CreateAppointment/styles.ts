@@ -11,7 +11,7 @@ export const Container = styled.View`
 export const Header = styled.View`
 	padding: 24px;
 	padding-top: ${getStatusBarHeight() + 24}px;
-	background: #28262e;
+	background: ${props => props.theme.colors.senary};
 
 	flex-direction: row;
 	justify-content: space-between;
@@ -19,8 +19,8 @@ export const Header = styled.View`
 `
 
 export const HeaderTitle = styled.Text`
-	color: #f4ede8;
-	font-family: 'RobotoSlab-Medium';
+	color: ${props => props.theme.colors.tertiary};
+	font-family: ${props => props.theme.fonts.primary.medium};
 	font-size: 20px;
 	margin-left: 16px;
 `
@@ -43,7 +43,8 @@ export const ProvidersList = styled(FlatList as new () => FlatList<Provider>)`
 `
 
 export const ProviderContainer = styled(RectButton)<ProviderContainerProps>`
-	background: ${props => (props.selected ? '#ff9000' : '#3e3b47')};
+	background: ${props =>
+		props.selected ? props.theme.colors.primary : props.theme.colors.secundary};
 	padding: 8px 12px;
 	margin-right: 16px;
 	border-radius: 10px;
@@ -59,7 +60,10 @@ export const ProviderAvatar = styled.Image`
 
 export const ProviderName = styled.Text<ProviderNameProps>`
 	margin-left: 8px;
-	font-family: 'RobotoSlab-Medium';
+	font-family: ${props => props.theme.fonts.primary.medium};
 	font-size: 16px;
-	color: ${props => (props.selected ? '#232129' : '#f4ede8')};
+	color: ${props =>
+		props.selected
+			? props.theme.colors.quartenary
+			: props.theme.colors.tertiary};
 `

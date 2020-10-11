@@ -6,23 +6,12 @@ import React, {
 	forwardRef,
 	useCallback,
 } from 'react'
-import { TextInputProps } from 'react-native'
+import { useTheme } from 'styled-components'
 import { useField } from '@unform/core'
 
+import { InputProps, InputRef, InputValueReference } from './types'
+
 import { Container, TextInput, Icon } from './styles'
-
-interface InputProps extends TextInputProps {
-	name: string
-	icon: string
-}
-
-interface InputValueReference {
-	value: string
-}
-
-interface InputRef {
-	focus(): void
-}
 
 const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
 	{ name, icon, ...rest },
@@ -36,6 +25,8 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
 
 	const [isFocused, setIsFocused] = useState(false)
 	const [isFilled, setIsFilled] = useState(false)
+
+	const { colors } = useTheme()
 
 	const handleInputFocus = useCallback(() => {
 		setIsFocused(true)
@@ -74,12 +65,12 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
 			<Icon
 				name={icon}
 				size={20}
-				color={isFocused || isFilled ? '#ff9000' : '#666360'}
+				color={isFocused || isFilled ? colors.primary : colors.octonary}
 			/>
 
 			<TextInput
 				ref={inputElementRef}
-				placeholderTextColor="#666360"
+				placeholderTextColor={colors.octonary}
 				keyboardAppearance="dark"
 				onFocus={handleInputFocus}
 				onBlur={handleInputBlur}

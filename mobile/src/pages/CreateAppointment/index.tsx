@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { Feather } from '@expo/vector-icons'
+import { useTheme } from 'styled-components'
 
-import { useAuth } from '../../context/AuthContext'
+import { useAuth } from '../../context/auth'
 
 import apiClient from '../../services/apiClient'
 import defaultAvatar from '../../assets/default-avatar.png'
@@ -32,6 +33,8 @@ const CreateAppointment: React.FC = () => {
 	const { user } = useAuth()
 	const { goBack } = useNavigation()
 
+	const { colors } = useTheme()
+
 	const navigateBack = useCallback(() => {
 		goBack()
 	}, [goBack])
@@ -58,7 +61,7 @@ const CreateAppointment: React.FC = () => {
 		<Container>
 			<Header>
 				<BackButton onPress={navigateBack}>
-					<Feather name="chevron-left" size={24} color="#999591" />
+					<Feather name="chevron-left" size={24} color={colors.quinary} />
 				</BackButton>
 				<HeaderTitle>Cabeleireiros</HeaderTitle>
 				<UserAvatar source={userAvatar} />

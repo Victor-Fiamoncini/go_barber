@@ -6,31 +6,10 @@ import React, {
 	createContext,
 } from 'react'
 import AsyncStorage from '@react-native-community/async-storage'
-import apiClient from '../services/apiClient'
 
-interface User {
-	id: string
-	name: string
-	email: string
-	avatar_url: string
-}
+import apiClient from '../../services/apiClient'
 
-interface AuthState {
-	token: string
-	user: User
-}
-
-interface SignInCredentials {
-	email: string
-	password: string
-}
-
-interface AuthContextData {
-	user: User
-	loading: boolean
-	signIn: (credentials: SignInCredentials) => Promise<void>
-	signOut: () => void
-}
+import { AuthContextData, AuthState } from './types'
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 

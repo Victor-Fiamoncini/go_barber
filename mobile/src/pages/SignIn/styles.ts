@@ -11,8 +11,8 @@ export const Container = styled.View`
 
 export const Title = styled.Text`
 	font-size: 20px;
-	color: #f4ebe8;
-	font-family: 'RobotoSlab-Medium';
+	color: ${props => props.theme.colors.tertiary};
+	font-family: ${props => props.theme.fonts.primary.medium};
 	margin: 64px 0 24px;
 `
 
@@ -21,9 +21,9 @@ export const ForgotPassword = styled.TouchableOpacity`
 `
 
 export const ForgotPasswordText = styled.Text`
-	color: #f4ede8;
+	color: ${props => props.theme.colors.tertiary};
 	font-size: 16px;
-	font-family: 'RobotoSlab-Regular';
+	font-family: ${props => props.theme.fonts.primary};
 `
 
 export const CreateAccountButton = styled.TouchableOpacity`
@@ -31,9 +31,9 @@ export const CreateAccountButton = styled.TouchableOpacity`
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background: #312e38;
+	background: ${props => props.theme.colors.background};
 	border-top-width: 1px;
-	border-color: #232129;
+	border-color: ${props => props.theme.colors.quartenary};
 	padding: 16px 0 ${16 + getBottomSpace()}px;
 	justify-content: center;
 	align-items: center;
@@ -41,8 +41,8 @@ export const CreateAccountButton = styled.TouchableOpacity`
 `
 
 export const CreateAccountButtonText = styled.Text`
-	color: #ff9000;
+	color: ${props => props.theme.colors.primary};
 	font-size: 18px;
-	font-family: 'RobotoSlab-Regular';
+	font-family: ${props => props.theme.fonts.primary};
 	margin-left: 16px;
 `

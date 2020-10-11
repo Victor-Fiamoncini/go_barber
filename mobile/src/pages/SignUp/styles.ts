@@ -11,8 +11,8 @@ export const Container = styled.View`
 
 export const Title = styled.Text`
 	font-size: 20px;
-	color: #f4ebe8;
-	font-family: 'RobotoSlab-Medium';
+	color: ${props => props.theme.colors.tertiary};
+	font-family: ${props => props.theme.fonts.primary.medium};
 	margin: 64px 0 24px;
 `
 
@@ -21,9 +21,9 @@ export const BackToSignInButton = styled.TouchableOpacity`
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background: #312e38;
+	background: ${props => props.theme.colors.background};
 	border-top-width: 1px;
-	border-color: #232129;
+	border-color: ${props => props.theme.colors.quartenary};
 	padding: 16px 0 ${16 + getBottomSpace()}px;
 	justify-content: center;
 	align-items: center;
@@ -31,8 +31,8 @@ export const BackToSignInButton = styled.TouchableOpacity`
 `
 
 export const BackToSignInButtonText = styled.Text`
-	color: #fff;
+	color: ${props => props.theme.colors.white};
 	font-size: 18px;
-	font-family: 'RobotoSlab-Regular';
+	font-family: ${props => props.theme.fonts.primary.regular};
 	margin-left: 16px;
 `

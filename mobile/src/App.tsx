@@ -1,9 +1,7 @@
 import 'react-native-gesture-handler'
 
 import React from 'react'
-import { View } from 'react-native'
 import { registerRootComponent } from 'expo'
-import { StatusBar } from 'expo-status-bar'
 import { useFonts } from 'expo-font'
 import { NavigationContainer } from '@react-navigation/native'
 
@@ -22,12 +20,9 @@ const App: React.FC = () => {
 
 	return (
 		<NavigationContainer>
-			<StatusBar style="light" backgroundColor="#312e38" />
 			{isLoaded && (
 				<AppProvider>
-					<View style={{ flex: 1, backgroundColor: '#312e38' }}>
-						<Routes />
-					</View>
+					<Routes />
 				</AppProvider>
 			)}
 		</NavigationContainer>

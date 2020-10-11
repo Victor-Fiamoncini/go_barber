@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Container } from './styles'
-import { useAuth } from '../../context/AuthContext'
+import { useAuth } from '../../context/auth'
 
 const Profile: React.FC = () => {
 	const { user } = useAuth()

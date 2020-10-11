@@ -13,13 +13,17 @@ import { useNavigation } from '@react-navigation/native'
 import { Form } from '@unform/mobile'
 import { FormHandles } from '@unform/core'
 import * as Yup from 'yup'
+import { useTheme } from 'styled-components'
 
+import { useAuth } from '../../context/auth'
 import getValidationErrors from '../../utils/getValidationErrors'
 
 import Input from '../../components/Input'
 import Button from '../../components/Button'
 
 import logoImg from '../../assets/logo.png'
+
+import { SignInFormData } from './types'
 
 import {
 	Container,
@@ -29,19 +33,15 @@ import {
 	ForgotPasswordText,
 	Title,
 } from './styles'
-import { useAuth } from '../../context/AuthContext'
-
-interface SignInFormData {
-	email: string
-	password: string
-}
 
 const SignIn: React.FC = () => {
 	const formRef = useRef<FormHandles>(null)
 	const passwordInputRef = useRef<TextInput>(null)
 
-	const navigation = useNavigation()
 	const { signIn } = useAuth()
+	const navigation = useNavigation()
+
+	const { colors } = useTheme()
 
 	const handleSignIn = useCallback(
 		async (data: SignInFormData) => {
@@ -125,7 +125,7 @@ const SignIn: React.FC = () => {
 				</ScrollView>
 			</KeyboardAvoidingView>
 			<CreateAccountButton onPress={() => navigation.navigate('SignUp')}>
-				<Feather name="log-in" size={20} color="#ff9000" />
+				<Feather name="log-in" size={20} color={colors.primary} />
 				<CreateAccountButtonText>Criar uma conta</CreateAccountButtonText>
 			</CreateAccountButton>
 		</>

@@ -12,7 +12,7 @@ export const Container = styled.View`
 export const Header = styled.View`
 	padding: 24px;
 	padding-top: ${getStatusBarHeight() + 24}px;
-	background: #28262e;
+	background: ${props => props.theme.colors.senary};
 
 	flex-direction: row;
 	justify-content: space-between;
@@ -20,15 +20,15 @@ export const Header = styled.View`
 `
 
 export const HeaderTitle = styled.Text`
-	color: #f4ede8;
+	color: ${props => props.theme.colors.tertiary};
 	font-size: 24px;
-	font-family: 'RobotoSlab-Regular';
+	font-family: ${props => props.theme.fonts.primary.regular};
 	line-height: 28px;
 `
 
 export const UserName = styled.Text`
-	color: #ff9000;
-	font-family: 'RobotoSlab-Medium';
+	color: ${props => props.theme.colors.primary};
+	font-family: ${props => props.theme.fonts.primary.medium};
 `
 
 export const ProfileButton = styled.TouchableOpacity``
@@ -44,7 +44,7 @@ export const ProvidersList = styled(FlatList as new () => FlatList<Provider>)`
 `
 
 export const ProviderContainer = styled(RectButton)`
-	background: #3e3b47;
+	background: ${props => props.theme.colors.secundary};
 	border-radius: 10px;
 	padding: 20px;
 	margin-bottom: 16px;
@@ -64,9 +64,9 @@ export const ProviderInfo = styled.View`
 `
 
 export const ProviderName = styled.Text`
-	font-family: 'RobotoSlab-Medium';
+	font-family: ${props => props.theme.fonts.primary.medium};
 	font-size: 18px;
-	color: #f4ede8;
+	color: ${props => props.theme.colors.tertiary};
 `
 
 export const ProviderMeta = styled.View`
@@ -77,13 +77,13 @@ export const ProviderMeta = styled.View`
 
 export const ProviderMetaText = styled.Text`
 	margin-left: 8px;
-	color: #999591;
-	font-family: 'RobotoSlab-Regular';
+	color: ${props => props.theme.colors.quinary};
+	font-family: ${props => props.theme.fonts.primary.regular};
 `
 
 export const ProvidersListTitle = styled.Text`
 	font-size: 24px;
-	font-family: 'RobotoSlab-Medium';
-	color: #f4ede8;
+	font-family: ${props => props.theme.fonts.primary.medium};
+	color: ${props => props.theme.colors.tertiary};
 	margin-bottom: 24px;
 `

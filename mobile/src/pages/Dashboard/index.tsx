@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { Feather } from '@expo/vector-icons'
+import { useTheme } from 'styled-components'
 
-import { useAuth } from '../../context/AuthContext'
+import { useAuth } from '../../context/auth'
 
 import apiClient from '../../services/apiClient'
 import defaultAvatar from '../../assets/default-avatar.png'
@@ -31,6 +32,8 @@ const Dashboard: React.FC = () => {
 
 	const { user } = useAuth()
 	const { navigate } = useNavigation()
+
+	const { colors } = useTheme()
 
 	const navigateToProfile = useCallback(() => {
 		navigate('Profile')
@@ -82,11 +85,11 @@ const Dashboard: React.FC = () => {
 						<ProviderInfo>
 							<ProviderName>{provider.name}</ProviderName>
 							<ProviderMeta>
-								<Feather name="calendar" size={14} color="#ff9000" />
+								<Feather name="calendar" size={14} color={colors.primary} />
 								<ProviderMetaText>Segunda à sexta</ProviderMetaText>
 							</ProviderMeta>
 							<ProviderMeta>
-								<Feather name="clock" size={14} color="#ff9000" />
+								<Feather name="clock" size={14} color={colors.primary} />
 								<ProviderMetaText>8h às 18h</ProviderMetaText>
 							</ProviderMeta>
 						</ProviderInfo>

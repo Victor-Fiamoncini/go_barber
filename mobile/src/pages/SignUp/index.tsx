@@ -13,6 +13,7 @@ import { useNavigation } from '@react-navigation/native'
 import { Form } from '@unform/mobile'
 import { FormHandles } from '@unform/core'
 import * as Yup from 'yup'
+import { useTheme } from 'styled-components'
 
 import getValidationErrors from '../../utils/getValidationErrors'
 import apiClient from '../../services/apiClient'
@@ -22,6 +23,8 @@ import Button from '../../components/Button'
 
 import logoImg from '../../assets/logo.png'
 
+import { SignUpFormData } from './types'
+
 import {
 	Container,
 	BackToSignInButton,
@@ -29,18 +32,14 @@ import {
 	Title,
 } from './styles'
 
-interface SignUpFormData {
-	name: string
-	email: string
-	password: string
-}
-
 const SignUp: React.FC = () => {
 	const formRef = useRef<FormHandles>(null)
 	const emailInputRef = useRef<TextInput>(null)
 	const passwordInputRef = useRef<TextInput>(null)
 
 	const navigation = useNavigation()
+
+	const { colors } = useTheme()
 
 	const handleSignUp = useCallback(async (data: SignUpFormData) => {
 		try {
@@ -131,7 +130,7 @@ const SignUp: React.FC = () => {
 				</ScrollView>
 			</KeyboardAvoidingView>
 			<BackToSignInButton onPress={() => navigation.goBack()}>
-				<Feather name="arrow-left" size={20} color="#fff" />
+				<Feather name="arrow-left" size={20} color={colors.white} />
 				<BackToSignInButtonText>Voltar para logon</BackToSignInButtonText>
 			</BackToSignInButton>
 		</>
