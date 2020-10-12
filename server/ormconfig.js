@@ -16,7 +16,7 @@ module.exports = [
 		},
 	},
 	{
-		name: 'default-mongo',
+		name: 'mongo',
 		type: 'mongodb',
 		host: process.env.MONGO_HOST,
 		port: Number(process.env.MONGO_PORT),
