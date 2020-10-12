@@ -9,7 +9,7 @@ export default {
 		senary: '#28262e',
 		septenary: '#c53030',
 		octonary: '#666360',
-		nonary: '',
+		nonary: '#04d361',
 		denary: '',
 		background: '#312e38',
 		white: '#fff',
