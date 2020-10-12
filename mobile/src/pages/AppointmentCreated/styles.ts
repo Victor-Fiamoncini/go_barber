@@ -21,6 +21,7 @@ export const Description = styled.Text`
 	font-family: ${props => props.theme.fonts.primary.regular};
 	font-size: 18px;
 	margin-top: 16px;
+	text-align: center;
 `
 
 export const OkButton = styled(RectButton)`
