@@ -17,3 +17,8 @@ export interface ProviderContainerProps {
 export interface ProviderNameProps {
 	selected: boolean
 }
+
+export interface AvailabilityItem {
+	hour: number
+	available: boolean
+}

@@ -23,7 +23,7 @@ export const ForgotPassword = styled.TouchableOpacity`
 export const ForgotPasswordText = styled.Text`
 	color: ${props => props.theme.colors.tertiary};
 	font-size: 16px;
-	font-family: ${props => props.theme.fonts.primary};
+	font-family: ${props => props.theme.fonts.primary.medium};
 `
 
 export const CreateAccountButton = styled.TouchableOpacity`
@@ -43,6 +43,6 @@ export const CreateAccountButton = styled.TouchableOpacity`
 export const CreateAccountButtonText = styled.Text`
 	color: ${props => props.theme.colors.primary};
 	font-size: 18px;
-	font-family: ${props => props.theme.fonts.primary};
+	font-family: ${props => props.theme.fonts.primary.regular};
 	margin-left: 16px;
 `
