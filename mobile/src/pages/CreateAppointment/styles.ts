@@ -1,18 +1,17 @@
 import styled from 'styled-components/native'
-import { getStatusBarHeight } from 'react-native-iphone-x-helper'
 import { FlatList, RectButton } from 'react-native-gesture-handler'
+import { getStatusBarHeight } from 'react-native-iphone-x-helper'
 
-import { Provider, ProviderContainerProps, ProviderNameProps } from './types'
+import {
+	HourProps,
+	HourTextProps,
+	Provider,
+	ProviderContainerProps,
+	ProviderNameProps,
+} from './types'
 
 export const Container = styled.View`
 	flex: 1;
-`
-
-export const Title = styled.Text`
-	color: ${props => props.theme.colors.tertiary};
-	font-family: ${props => props.theme.fonts.primary.medium};
-	font-size: 20px;
-	margin-left: 16px;
 `
 
 export const Header = styled.View`
@@ -40,6 +39,8 @@ export const UserAvatar = styled.Image`
 	border-radius: 28px;
 	margin-left: auto;
 `
+
+export const Content = styled.ScrollView``
 
 export const ProvidersListContainer = styled.View`
 	height: 112px;
@@ -99,10 +100,67 @@ export const OpenDatePickerButtonText = styled.Text`
 	color: ${props => props.theme.colors.quartenary};
 `
 
-export const Schedule = styled.View``
+export const Schedule = styled.View`
+	padding: 24px 0 16px;
+	margin-left: 24px;
+`
 
-export const Section = styled.View``
+export const ScheduleTitle = styled.Text`
+	color: ${props => props.theme.colors.tertiary};
+	font-family: ${props => props.theme.fonts.primary.medium};
+	font-size: 24px;
+	margin-bottom: 10px;
+`
 
-export const SectionTitle = styled.Text``
+export const Section = styled.View`
+	margin-bottom: 24px;
+`
 
-export const SectionContent = styled.View``
+export const SectionTitle = styled.Text`
+	font-size: 18px;
+	color: ${props => props.theme.colors.quinary};
+	font-family: ${props => props.theme.fonts.primary.regular};
+	margin: 12px 0;
+`
+
+export const SectionContent = styled.ScrollView.attrs({
+	contentContarinerStyle: {
+		paddingHorizontal: 24,
+	},
+	horizontal: true,
+	showsHorizontalScrollIndicator: false,
+})``
+
+export const Hour = styled(RectButton)<HourProps>`
+	padding: 12px;
+	border-radius: 10px;
+	margin-right: 8px;
+
+	opacity: ${props => (props.available ? 1 : 0.3)};
+	background: ${props =>
+		props.selected ? props.theme.colors.primary : props.theme.colors.secundary};
+`
+
+export const HourText = styled.Text<HourTextProps>`
+	font-family: ${props => props.theme.fonts.primary.regular};
+	font-size: 16px;
+	color: ${props =>
+		props.selected
+			? props.theme.colors.quartenary
+			: props.theme.colors.tertiary};
+`
+
+export const CreateAppointmentButton = styled(RectButton)`
+	height: 50px;
+	background: ${props => props.theme.colors.primary};
+	border-radius: 10px;
+	align-items: center;
+	justify-content: center;
+	margin: 0 24px 24px;
+`
+
+export const CreateAppointmentButtonText = styled.Text`
+	font-family: ${props => props.theme.fonts.primary.medium};
+	font-size: 18px;
+	color: ${props => props.theme.colors.quartenary};
+`
