@@ -39,8 +39,7 @@ const SignIn: React.FC = () => {
 	const passwordInputRef = useRef<TextInput>(null)
 
 	const { signIn } = useAuth()
-	const navigation = useNavigation()
-
+	const { navigate } = useNavigation()
 	const { colors } = useTheme()
 
 	const handleSignIn = useCallback(
@@ -49,10 +48,8 @@ const SignIn: React.FC = () => {
 				formRef.current?.setErrors({})
 
 				const schema = Yup.object().shape({
-					email: Yup.string()
-						.required('Email obrigatório')
-						.email('Digite um e-mail válido'),
-					password: Yup.string().required('Senha obrigatória'),
+					email: Yup.string().required().email(),
+					password: Yup.string().required(),
 				})
 
 				await schema.validate(data, { abortEarly: false })
@@ -124,7 +121,7 @@ const SignIn: React.FC = () => {
 					</Container>
 				</ScrollView>
 			</KeyboardAvoidingView>
-			<CreateAccountButton onPress={() => navigation.navigate('SignUp')}>
+			<CreateAccountButton onPress={() => navigate('SignUp')}>
 				<Feather name="log-in" size={20} color={colors.primary} />
 				<CreateAccountButtonText>Criar uma conta</CreateAccountButtonText>
 			</CreateAccountButton>

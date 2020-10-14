@@ -53,7 +53,6 @@ const CreateAppointment: React.FC = () => {
 
 	const { user } = useAuth()
 	const { goBack, navigate } = useNavigation()
-
 	const { colors } = useTheme()
 
 	const navigateBack = useCallback(() => {

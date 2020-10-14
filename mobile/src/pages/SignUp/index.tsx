@@ -37,8 +37,7 @@ const SignUp: React.FC = () => {
 	const emailInputRef = useRef<TextInput>(null)
 	const passwordInputRef = useRef<TextInput>(null)
 
-	const navigation = useNavigation()
-
+	const { goBack } = useNavigation()
 	const { colors } = useTheme()
 
 	const handleSignUp = useCallback(async (data: SignUpFormData) => {
@@ -46,13 +45,9 @@ const SignUp: React.FC = () => {
 			formRef.current?.setErrors({})
 
 			const schema = Yup.object().shape({
-				name: Yup.string().required('Nome obrigatório'),
-				email: Yup.string()
-					.required('Email obrigatório')
-					.email('Digite um e-mail válido'),
-				password: Yup.string()
-					.min(6, 'A senha deve ter no mínimo 6 dígitos')
-					.required('Senha obrigatória'),
+				name: Yup.string().required(),
+				email: Yup.string().required().email(),
+				password: Yup.string().min(6).required(),
 			})
 
 			await schema.validate(data, { abortEarly: false })
@@ -61,13 +56,12 @@ const SignUp: React.FC = () => {
 
 			Alert.alert('Cadastro realizado com sucesso', 'Você já pode fazer login!')
 
-			navigation.goBack()
+			goBack()
 		} catch (err) {
 			if (err instanceof Yup.ValidationError) {
 				const errors = getValidationErrors(err)
 
 				formRef.current?.setErrors(errors)
-
 				return
 			}
 
@@ -129,7 +123,7 @@ const SignUp: React.FC = () => {
 					</Container>
 				</ScrollView>
 			</KeyboardAvoidingView>
-			<BackToSignInButton onPress={() => navigation.goBack()}>
+			<BackToSignInButton onPress={() => goBack()}>
 				<Feather name="arrow-left" size={20} color={colors.white} />
 				<BackToSignInButtonText>Voltar para logon</BackToSignInButtonText>
 			</BackToSignInButton>

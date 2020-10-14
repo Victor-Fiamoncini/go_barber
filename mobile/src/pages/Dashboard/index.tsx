@@ -32,7 +32,6 @@ const Dashboard: React.FC = () => {
 
 	const { user, signOut } = useAuth()
 	const { navigate } = useNavigation()
-
 	const { colors } = useTheme()
 
 	const navigateToProfile = useCallback(() => {
