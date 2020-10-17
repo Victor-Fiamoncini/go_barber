@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { AuthProvider } from './auth'
-import { ThemeProvider } from './theme'
+import { AuthProvider } from './AuthContext'
+import { ThemeProvider } from './ThemeContext'
 
 const AppProvider: React.FC = ({ children }) => (
 	<ThemeProvider>

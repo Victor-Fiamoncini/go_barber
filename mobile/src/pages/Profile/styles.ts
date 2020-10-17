@@ -24,4 +24,7 @@ export const UserAvatar = styled.Image`
 	align-self: center;
 `
 
-export const BackButton = styled.Button``
+export const BackButton = styled.TouchableOpacity`
+	margin: 140px 0 -100px;
+	z-index: 1;
+`

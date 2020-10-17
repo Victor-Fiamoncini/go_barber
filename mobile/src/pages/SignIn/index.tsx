@@ -15,7 +15,7 @@ import { FormHandles } from '@unform/core'
 import * as Yup from 'yup'
 import { useTheme } from 'styled-components'
 
-import { useAuth } from '../../context/auth'
+import { useAuth } from '../../context/AuthContext'
 import getValidationErrors from '../../utils/getValidationErrors'
 
 import Input from '../../components/Input'

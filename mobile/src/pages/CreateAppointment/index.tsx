@@ -6,7 +6,7 @@ import { useTheme } from 'styled-components'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { format } from 'date-fns'
 
-import { useAuth } from '../../context/auth'
+import { useAuth } from '../../context/AuthContext'
 
 import apiClient from '../../services/apiClient'
 import defaultAvatar from '../../assets/default-avatar.png'

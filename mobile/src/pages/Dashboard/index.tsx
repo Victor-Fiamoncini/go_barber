@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native'
 import { Feather } from '@expo/vector-icons'
 import { useTheme } from 'styled-components'
 
-import { useAuth } from '../../context/auth'
+import { useAuth } from '../../context/AuthContext'
 
 import apiClient from '../../services/apiClient'
 import defaultAvatar from '../../assets/default-avatar.png'
@@ -30,13 +30,12 @@ import {
 const Dashboard: React.FC = () => {
 	const [providers, setProviders] = useState<Provider[]>([])
 
-	const { user, signOut } = useAuth()
+	const { user } = useAuth()
 	const { navigate } = useNavigation()
 	const { colors } = useTheme()
 
 	const navigateToProfile = useCallback(() => {
 		navigate('Profile')
-		// signOut()
 	}, [navigate])
 
 	const navigateToCreateAppointment = useCallback(
