@@ -13,6 +13,7 @@ import { Form } from '@unform/mobile'
 import { FormHandles } from '@unform/core'
 import * as Yup from 'yup'
 import { useTheme } from 'styled-components'
+import * as ImagePicker from 'expo-image-picker'
 
 import { useAuth } from '../../context/AuthContext'
 import getValidationErrors from '../../utils/getValidationErrors'
@@ -107,8 +108,33 @@ const Profile: React.FC = () => {
 				)
 			}
 		},
-		[]
+		[goBack, updateUser]
 	)
+
+	const handleUpdateAvatar = useCallback(async () => {
+		const response = await ImagePicker.launchImageLibraryAsync({
+			mediaTypes: ImagePicker.MediaTypeOptions.All,
+			allowsEditing: true,
+			aspect: [4, 3],
+			quality: 1,
+			allowsMultipleSelection: false,
+		})
+
+		if (response.cancelled) return
+
+		const data = new FormData()
+		const name = `${user.id}-avatar.jpg`
+
+		data.append('avatar', {
+			type: 'image/jpeg',
+			uri: response.uri,
+			name,
+		})
+
+		apiClient.patch('/users/avatar', data).then(response => {
+			updateUser(response.data)
+		})
+	}, [ImagePicker.launchImageLibraryAsync, updateUser, user.id])
 
 	const handleGoBack = useCallback(() => {
 		goBack()
@@ -128,7 +154,7 @@ const Profile: React.FC = () => {
 					<BackButton onPress={handleGoBack}>
 						<Feather name="chevron-left" size={24} color={colors.quinary} />
 					</BackButton>
-					<UserAvatarButton>
+					<UserAvatarButton onPress={handleUpdateAvatar}>
 						<UserAvatar source={userAvatar} />
 					</UserAvatarButton>
 					<View>
