@@ -49,25 +49,25 @@ export const AnimationContainer = styled.div`
 			margin-bottom: 24px;
 		}
 		a {
-			color: #f4ede8;
+			color: ${props => props.theme.colors.tertiary};
 			text-decoration: none;
 			display: block;
 			margin-top: 24px;
 			transition: color 0.2s;
 			&:hover {
-				color: ${shade(0.2, '#f4ede8')};
+				color: ${props => shade(0.2, props.theme.colors.tertiary)};
 			}
 		}
 	}
 	> a {
 		display: flex;
 		align-items: center;
-		color: #ff9000;
+		color: ${props => props.theme.colors.primary};
 		text-decoration: none;
 		margin-top: 24px;
 		transition: color 0.2s;
 		&:hover {
-			color: ${shade(0.2, '#ff9000')};
+			color: ${props => shade(0.2, props.theme.colors.primary)};
 		}
 		svg {
 			margin-right: 16px;

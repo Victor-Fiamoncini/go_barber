@@ -1,26 +1,16 @@
-import React, {
-	useCallback,
-	useEffect,
-	useRef,
-	useState,
-	InputHTMLAttributes,
-} from 'react'
-import { IconBaseProps } from 'react-icons/lib'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { FiAlertCircle } from 'react-icons/fi'
 import { useField } from '@unform/core'
+import { useTheme } from 'styled-components'
+
+import { InputProps } from './types'
 
 import { Container, Error } from './styles'
-
-import Tooltip from '../Tooltip'
-
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-	name: string
-	icon?: React.ComponentType<IconBaseProps>
-}
 
 const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
 	const inputRef = useRef<HTMLInputElement>(null)
 
+	const { colors } = useTheme()
 	const { fieldName, defaultValue, error, registerField } = useField(name)
 
 	const [isFocused, setIsFocused] = useState(false)
@@ -56,7 +46,7 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
 			/>
 			{error && (
 				<Error title={error}>
-					<FiAlertCircle color="#c53030" size={20} />
+					<FiAlertCircle color={colors.septenary} size={20} />
 				</Error>
 			)}
 		</Container>

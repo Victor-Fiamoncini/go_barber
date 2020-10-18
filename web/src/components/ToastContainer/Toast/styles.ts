@@ -1,23 +1,21 @@
 import styled, { css } from 'styled-components'
 import { animated } from 'react-spring'
+import { lighten } from 'polished'
 
-interface ContainerProps {
-	type?: 'success' | 'error' | 'info'
-	hasdescription: number
-}
+import { ContainerProps } from './types'
 
 const toastTypeVariations = {
 	info: css`
-		background: #ebf8ff;
-		color: #3172b7;
+		background: ${props => lighten(0.5, props.theme.colors.messages.info)};
+		color: ${props => props.theme.colors.messages.info};
 	`,
 	success: css`
-		background: #e6fffa;
-		color: #2e656a;
+		background: ${props => lighten(0.5, props.theme.colors.messages.success)};
+		color: ${props => props.theme.colors.messages.success};
 	`,
 	error: css`
-		background: #fddede;
-		color: #c53030;
+		background: ${props => lighten(0.5, props.theme.colors.messages.error)};
+		color: ${props => props.theme.colors.messages.error};
 	`,
 }
 
@@ -26,7 +24,7 @@ export const Container = styled(animated.div)<ContainerProps>`
 	position: relative;
 	padding: 16px 30px 16px 16px;
 	border-radius: 10px;
-	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+	box-shadow: 2px 2px 8px rgba(0, 0, 0, ${props => props.theme.colors.senary});
 	display: flex;
 	& + div {
 		margin-top: 8px;

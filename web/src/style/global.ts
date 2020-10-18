@@ -6,18 +6,19 @@ export default createGlobalStyle`
 		padding: 0;
 		outline: none;
 		box-sizing: border-box;
+		font-size: 16px;
 	}
 
 	body {
-		background: #312e38;
-		color: #fff;
+		background: ${props => props.theme.colors.background};
+		color: ${props => props.theme.colors.white};
 		-webkit-font-smoothing: antialiased;
 	}
 
 	body,
 	input,
 	button {
-		font-family: 'Roboto Slab', serif;
+		font-family: ${props => props.theme.fonts.primary}, serif;
 		font-size: 16px;
 	}
 

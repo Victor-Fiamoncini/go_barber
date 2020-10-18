@@ -1,16 +1,11 @@
 import React, { useEffect } from 'react'
 import { FiAlertCircle, FiXCircle, FiCheckCircle, FiInfo } from 'react-icons/fi'
 
-import { Container } from './styles'
-
 import { useToast } from '../../../context/ToastContext'
 
-import { ToastMessage } from '../../../context/ToastContext/types'
+import { ToastProps } from './types'
 
-interface ToastProps {
-	message: ToastMessage
-	style: object
-}
+import { Container } from './styles'
 
 const icons = {
 	info: <FiInfo size={24} />,

@@ -2,15 +2,13 @@ import React from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 import AppProvider from './context'
-import Routes from './routes'
-import GlobalStyle from './styles/global'
+import Wrapper from './Wrapper'
 
 const App: React.FC = () => (
 	<Router>
 		<AppProvider>
-			<Routes />
+			<Wrapper />
 		</AppProvider>
-		<GlobalStyle />
 	</Router>
 )
 

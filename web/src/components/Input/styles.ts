@@ -2,36 +2,32 @@ import styled, { css } from 'styled-components'
 
 import Tooltip from '../Tooltip'
 
-interface ContainerProps {
-	isFocused: boolean
-	isFilled: boolean
-	isErrored: boolean
-}
+import { ContainerProps } from './types'
 
 export const Container = styled.div<ContainerProps>`
-	background: #232129;
+	background: ${props => props.theme.colors.quartenary};
 	border-radius: 10px;
-	border: 2px solid #232129;
+	border: 2px solid ${props => props.theme.colors.quartenary};
 	padding: 16px;
 	width: 100%;
 	display: flex;
 	align-items: center;
-	color: #666360;
+	color: ${props => props.theme.colors.octonary};
 	${props =>
 		props.isErrored &&
 		css`
-			border-color: #c53030;
+			border-color: ${props => props.theme.colors.septenary};
 		`}
 	${props =>
 		props.isFocused &&
 		css`
-			color: #ff9000;
-			border-color: #ff9000;
+			color: ${props => props.theme.colors.primary};
+			border-color: ${props => props.theme.colors.primary};
 		`}
 	${props =>
 		props.isFilled &&
 		css`
-			color: #ff9000;
+			color: ${props => props.theme.colors.primary};
 		`}
 	& + div {
 		margin-top: 8px;
@@ -40,12 +36,12 @@ export const Container = styled.div<ContainerProps>`
 		margin-right: 16px;
 	}
 	input {
-		color: #f4ede8;
+		color: ${props => props.theme.colors.tertiary};
 		flex: 1;
 		background: transparent;
 		border: 0;
 		&::placeholder {
-			color: #666360;
+			color: ${props => props.theme.colors.octonary};
 		}
 	}
 `
@@ -57,10 +53,10 @@ export const Error = styled(Tooltip)`
 		margin: 0;
 	}
 	span {
-		background: #c53030;
-		color: #fff;
+		background: ${props => props.theme.colors.septenary};
+		color: ${props => props.theme.colors.white};
 		&::before {
-			border-color: #c53030 transparent;
+			border-color: ${props => props.theme.colors.septenary} transparent;
 		}
 	}
 `
