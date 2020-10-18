@@ -6,20 +6,16 @@ import { FormHandles } from '@unform/core'
 import * as Yup from 'yup'
 
 import { useToast } from '../../context/ToastContext'
-
 import getValidationErrors from '../../utils/getValidationErrors'
 import apiClient from '../../services/apiClient'
-
-import { AnimationContainer, Container, Content, Background } from './styles'
-
 import logo from '../../assets/logo.svg'
 
 import Input from '../../components/Input'
 import Button from '../../components/Button'
 
-interface ForgotPasswordFormData {
-	email: string
-}
+import { ForgotPasswordFormData } from './types'
+
+import { AnimationContainer, Container, Content, Background } from './styles'
 
 const ForgotPassword: React.FC = () => {
 	const [loading, setLoading] = useState(false)
@@ -79,7 +75,12 @@ const ForgotPassword: React.FC = () => {
 					<img src={logo} alt="GoBarber" />
 					<Form ref={formRef} onSubmit={handleSubmit}>
 						<h1>Recuperar senha</h1>
-						<Input name="email" icon={FiMail} placeholder="E-mail" />
+						<Input
+							name="email"
+							type="text"
+							icon={FiMail}
+							placeholder="E-mail"
+						/>
 						<Button type="submit" loading={loading}>
 							Recuperar
 						</Button>

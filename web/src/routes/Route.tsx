@@ -1,16 +1,9 @@
 import React from 'react'
-import {
-	RouteProps as ReactRouteProps,
-	Route as ReactRoute,
-	Redirect,
-} from 'react-router-dom'
+import { Route as ReactRoute, Redirect } from 'react-router-dom'
 
 import { useAuth } from '../context/AuthContext'
 
-interface RouteProps extends ReactRouteProps {
-	isPrivate?: boolean
-	component: React.ComponentType
-}
+import { RouteProps } from './types'
 
 const Route: React.FC<RouteProps> = ({
 	isPrivate = false,
@@ -29,7 +22,9 @@ const Route: React.FC<RouteProps> = ({
 					<Redirect
 						to={{
 							pathname: isPrivate ? '/' : '/dashboard',
-							state: { from: location },
+							state: {
+								from: location,
+							},
 						}}
 					/>
 				)

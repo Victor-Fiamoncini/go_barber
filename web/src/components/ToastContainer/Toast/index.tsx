@@ -5,7 +5,7 @@ import { Container } from './styles'
 
 import { useToast } from '../../../context/ToastContext'
 
-import { ToastMessage } from '../../../context/ToastContext'
+import { ToastMessage } from '../../../context/ToastContext/types'
 
 interface ToastProps {
 	message: ToastMessage

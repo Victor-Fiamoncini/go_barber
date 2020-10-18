@@ -9,18 +9,14 @@ import { useToast } from '../../context/ToastContext'
 
 import getValidationErrors from '../../utils/getValidationErrors'
 import apiClient from '../../services/apiClient'
-
-import { AnimationContainer, Container, Content, Background } from './styles'
-
 import logo from '../../assets/logo.svg'
 
 import Input from '../../components/Input'
 import Button from '../../components/Button'
 
-interface ResetPasswordFormData {
-	password: string
-	password_confirmation: string
-}
+import { ResetPasswordFormData } from './types'
+
+import { AnimationContainer, Container, Content, Background } from './styles'
 
 const ResetPassword: React.FC = () => {
 	const formRef = useRef<FormHandles>(null)
@@ -46,9 +42,7 @@ const ResetPassword: React.FC = () => {
 				const { password, password_confirmation } = data
 				const token = location.search.replace('?token=', '')
 
-				if (!token) {
-					throw new Error()
-				}
+				if (!token) throw new Error()
 
 				await apiClient.post('/password/reset', {
 					password,

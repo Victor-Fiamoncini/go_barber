@@ -8,7 +8,7 @@ import * as Yup from 'yup'
 import { useAuth } from '../../context/AuthContext'
 import { useToast } from '../../context/ToastContext'
 
-import api from '../../services/apiClient'
+import apiClient from '../../services/apiClient'
 import getValidationErrors from '../../utils/getValidationErrors'
 import defaultAvatar from '../../assets/default-avatar.png'
 
@@ -16,15 +16,8 @@ import { Container, Content, AvatarInput } from './styles'
 
 import Input from '../../components/Input'
 import Button from '../../components/Button'
-import apiClient from '../../services/apiClient'
 
-interface ProfileFormData {
-	name: string
-	email: string
-	old_password: string
-	password: string
-	password_confirmation: string
-}
+import { ProfileFormData } from './types'
 
 const Profile: React.FC = () => {
 	const formRef = useRef<FormHandles>(null)
@@ -73,11 +66,11 @@ const Profile: React.FC = () => {
 					}
 				)
 
-				const response = await api.put('/profile', formData)
+				apiClient.put('/profile', formData).then(response => {
+					updateUser(response.data)
 
-				updateUser(response.data)
-
-				history.push('/')
+					history.push('/')
+				})
 
 				addToast({
 					type: 'success',
@@ -100,7 +93,7 @@ const Profile: React.FC = () => {
 				})
 			}
 		},
-		[addToast, history]
+		[addToast, history.push, updateUser]
 	)
 
 	const handleAvatarChange = useCallback(
@@ -120,7 +113,7 @@ const Profile: React.FC = () => {
 				})
 			}
 		},
-		[apiClient, addToast]
+		[apiClient, addToast, updateUser]
 	)
 
 	return (
@@ -149,13 +142,24 @@ const Profile: React.FC = () => {
 						</label>
 					</AvatarInput>
 					<h1>Meu perfil</h1>
-					<Input name="name" icon={FiUser} placeholder="Nome" />
-					<Input name="email" icon={FiMail} placeholder="E-mail" />
+					<Input name="name" type="text" icon={FiUser} placeholder="Nome" />
+					<Input name="email" type="email" icon={FiMail} placeholder="E-mail" />
 					<br />
-					<Input name="old_password" icon={FiLock} placeholder="Senha atual" />
-					<Input name="password" icon={FiLock} placeholder="Nova senha" />
+					<Input
+						name="old_password"
+						type="password"
+						icon={FiLock}
+						placeholder="Senha atual"
+					/>
+					<Input
+						name="password"
+						type="password"
+						icon={FiLock}
+						placeholder="Nova senha"
+					/>
 					<Input
 						name="password_confirmation"
+						type="password"
 						icon={FiLock}
 						placeholder="Confirmar senha"
 					/>

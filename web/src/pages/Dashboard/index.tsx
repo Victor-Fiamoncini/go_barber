@@ -8,7 +8,14 @@ import 'react-day-picker/lib/style.css'
 
 import { useAuth } from '../../context/AuthContext'
 
+import apiClient from '../../services/apiClient'
+import logo from '../../assets/logo.svg'
 import defaultAvatar from '../../assets/default-avatar.png'
+
+import months from '../../data/months'
+import weekDays from '../../data/weekDays'
+
+import { Appointment, MonthAvailabilityItem } from './types'
 
 import {
 	Container,
@@ -19,27 +26,9 @@ import {
 	Schedule,
 	NextAppointment,
 	Section,
-	Appointment,
+	Appointment as AppointmentItem,
 	Calendar,
 } from './styles'
-
-import logo from '../../assets/logo.svg'
-import apiClient from '../../services/apiClient'
-
-interface MonthAvailabilityItem {
-	day: number
-	available: boolean
-}
-
-interface Appointment {
-	id: number
-	date: string
-	hourFormatted: string
-	user: {
-		name: string
-		avatar_url: string
-	}
-}
 
 const Dashboard: React.FC = () => {
 	const [selectedDate, setSelectedDate] = useState(new Date())
@@ -186,7 +175,7 @@ const Dashboard: React.FC = () => {
 							<p>Nenhum agendamento neste período</p>
 						) : (
 							mourningAppointments.map(appointment => (
-								<Appointment key={appointment.id}>
+								<AppointmentItem key={appointment.id}>
 									<span>
 										<FiClock />
 										{appointment.hourFormatted}
@@ -198,7 +187,7 @@ const Dashboard: React.FC = () => {
 										/>
 										<strong>{appointment.user.name}</strong>
 									</div>
-								</Appointment>
+								</AppointmentItem>
 							))
 						)}
 					</Section>
@@ -208,7 +197,7 @@ const Dashboard: React.FC = () => {
 							<p>Nenhum agendamento neste período</p>
 						) : (
 							afternoonAppointments.map(appointment => (
-								<Appointment key={appointment.id}>
+								<AppointmentItem key={appointment.id}>
 									<span>
 										<FiClock />
 										{appointment.hourFormatted}
@@ -220,7 +209,7 @@ const Dashboard: React.FC = () => {
 										/>
 										<strong>{appointment.user.name}</strong>
 									</div>
-								</Appointment>
+								</AppointmentItem>
 							))
 						)}
 					</Section>
@@ -238,21 +227,8 @@ const Dashboard: React.FC = () => {
 						selectedDays={selectedDate}
 						onDayClick={handleDateChange}
 						onMonthChange={handleMonthChange}
-						weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S']}
-						months={[
-							'Janeiro',
-							'Fevereiro',
-							'Março',
-							'Abril',
-							'Maio',
-							'Junho',
-							'Julho',
-							'Agosto',
-							'Setembro',
-							'Outubro',
-							'Novembro',
-							'Dezembro',
-						]}
+						weekdaysShort={weekDays}
+						months={months}
 					/>
 				</Calendar>
 			</Content>

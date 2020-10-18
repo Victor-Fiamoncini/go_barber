@@ -10,7 +10,7 @@ import ResetPassword from '../pages/ResetPassword'
 import Dashboard from '../pages/Dashboard'
 import Profile from '../pages/Profile'
 
-const Routes = () => (
+const Routes: React.FC = () => (
 	<Switch>
 		<Route path="/" exact component={SignIn} />
 		<Route path="/signup" component={SignUp} />
